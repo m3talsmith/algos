@@ -15,3 +15,11 @@ func TestFindDuplicatesNaive(t *testing.T) {
 		t.Fatalf("\nExpected: %v\nGot: %v", knownDuplicates, duplicates)
 	}
 }
+
+func TestFindDuplicatesNaiveNoDuplicates(t *testing.T) {
+	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	duplicates := FindDuplicatesNaive(numbers)
+	if len(duplicates) > 0 {
+		t.Fatalf("No duplicates should have been found: %v", duplicates)
+	}
+}

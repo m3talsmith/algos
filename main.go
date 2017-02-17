@@ -1,8 +1,9 @@
 package main
 
 import (
-	"algos/data_sorting"
 	"fmt"
+
+	"github.com/m3talsmith/algos/data_sorting"
 )
 
 func main() {
