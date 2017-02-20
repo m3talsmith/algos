@@ -23,3 +23,12 @@ func TestFindDuplicatesNaiveNoDuplicates(t *testing.T) {
 		t.Fatalf("No duplicates should have been found: %v", duplicates)
 	}
 }
+
+func TestFindDuplicatesNaiveSingleValues(t *testing.T) {
+	numbers := []int{1, 2, 8, 8, 9, 8, 8}
+	knownDuplicates := []int{8}
+	duplicates := FindDuplicatesNaive(numbers)
+	if !reflect.DeepEqual(duplicates, knownDuplicates) {
+		t.Fatalf("\nExpected: %v\nGot: %v", knownDuplicates, duplicates)
+	}
+}

@@ -11,15 +11,9 @@ import "sort"
  * list of previously found duplicates, increase the index by two, and
  * continue. If there is no duplicate, we increase the index by one and
  * continue. We will have to check that the right isn't out of bounds before
- * checking the for a duplicate. Once we have gone through the whole list
- * we'll return the list of possible duplicates.
- *
- * Possible Problems
- * -----------------
- * It is possible that we find a right neighbor that is a duplicate, but fail
- * to account for any duplicates to the right of that neighbor. It's not to
- * then loop over that, but the duplicate has already been marked. From a
- * naive implementation, this work though.
+ * checking the for a duplicate. If there's a duplicate, we advance the right
+ * neighbor index until it no longer matches. Once we have gone through the
+ * whole list we'll return the list of possible duplicates.
  */
 func FindDuplicatesNaive(numbers []int) []int {
 	i := 0
@@ -30,21 +24,22 @@ func FindDuplicatesNaive(numbers []int) []int {
 		sortedNumbers.Sort()
 	}
 
-	var currentInt, rightInt, nextInt int
+	var ni int
 	for i < count {
-		nextInt = i + 1
-		if nextInt >= count {
-			i = nextInt
+		ni = i + 1
+		if ni >= count {
+			i = ni
 			break
 		}
-		currentInt = sortedNumbers[i]
-		rightInt = sortedNumbers[nextInt]
-		if currentInt == rightInt {
-			duplicates = append(duplicates, currentInt)
-			i = i + 2
-		} else {
-			i = nextInt
+		if sortedNumbers[i] == sortedNumbers[ni] {
+			duplicates = append(duplicates, sortedNumbers[i])
+			// Increment the right neighbor index until it no longer matches
+			for sortedNumbers[i] == sortedNumbers[ni] {
+				ni = ni + 1
+			}
 		}
+		i = ni
 	}
+
 	return duplicates
 }
