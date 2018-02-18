@@ -12,13 +12,13 @@
  * whole list we'll return the list of possible duplicates.
  */
 fn find_duplicates_naive(numbers: &Vec<i32>) -> Vec<i32> {
-    let count = numbers.len();
     let mut duplicates: Vec<i32> = Vec::new();
     let mut sorted_numbers: Vec<i32> = Vec::new();
     sorted_numbers.extend_from_slice(&numbers);
     sorted_numbers.sort();
 
     {
+        let count = numbers.len();
         let mut i = 0; // Index
         while i < count {
             let mut ni = i + 1; // Next Index
